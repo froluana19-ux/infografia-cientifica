@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>*** 5 Hallazgos: ** en Educación Inclusiva</title>
+    <style>
+        /* =========================================
+           RESET Y VARIABLES GLOBALES
+           ========================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-principal: #1E3A8A;
+            /* Azul profundo */
+            --color-secundario: #10B981;
+            /* Verde tecnológico */
+            --color-acento: #F59E0B;
+            /* Amarillo energético */
+            --fondo: #F8FAFC;
+            --texto: #334155;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--fondo);
+            color: var(--texto);
+            line-height: 1.6;
+            /* Mobile First: Área táctil amplia y espaciado base para móviles */
+            padding: 1.5rem;
+        }
+
+        /* =========================================
+           TIPOGRAFÍA Y CABECERA
+           ========================================= */
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2.5rem 1.5rem;
+            background: linear-gradient(135deg, var(--color-principal), #2563EB);
+            border-radius: 1.5rem;
+            color: white;
+            box-shadow: 0 10px 15px -3px rgba(30, 58, 138, 0.3);
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: var(--color-acento);
+        }
+
+        /* =========================================
+           LISTA Y ESTRUCTURA PRINCIPAL
+           ========================================= */
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        ol {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            /* Espaciado amplio entre ítems */
+        }
+
+        ol li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            /* Transición global obligatoria según restricciones */
+            transition: all 0.4s ease-in-out;
+            border-left: 5px solid transparent;
+        }
+
+        /* Efecto de elevación y borde en hover de la tarjeta */
+        ol li:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 25px -5px rgba(30, 58, 138, 0.15);
+            border-left-color: var(--color-secundario);
+        }
+
+        .contenido-texto {
+            flex: 1;
+            padding-top: 0.5rem;
+            /* Alineación visual con el centro del ícono */
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--color-principal);
+            margin-bottom: 0.25rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+            transition: all 0.4s ease-in-out;
+        }
+
+        /* Resaltado animado del texto al pasar el cursor */
+        ol li:hover h2 {
+            color: var(--color-secundario);
+            letter-spacing: 0.01em;
+        }
+
+        p.descripcion {
+            font-size: 1rem;
+            color: #64748B;
+            transition: all 0.4s ease-in-out;
+        }
+
+        ol li:hover p.descripcion {
+            color: var(--texto);
+        }
+
+        /* =========================================
+           EFECTO PRINCIPAL: ÍCONO ANIMADO (#18)
+           ========================================= */
+        .icono-contenedor {
+            position: relative;
+            width: 70px;
+            height: 70px;
+            flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .emoji {
+            font-size: 2rem;
+            position: relative;
+            z-index: 2;
+            transition: all 0.4s ease-in-out;
+        }
+
+        /* Animación sutil de escala al emoji en hover */
+        ol li:hover .emoji {
+            transform: scale(1.2);
+        }
+
+        /* Base de los semicírculos usando border-radius: 50% */
+        .semi-circulo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            transition: all 0.4s ease-in-out;
+            opacity: 0.7;
+        }
+
+        /* 
+           Semicírculo Izquierdo (::before simulado con clase)
+           Inicialmente visible 
+        */
+        .semi-circulo.antes {
+            background-color: var(--color-principal);
+            clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+            z-index: 1;
+            transform: rotate(0deg);
+        }
+
+        /* 
+           Semicírculo Derecho (::after simulado con clase)
+           Inicialmente rotado 180deg para ocultarse detrás del izquierdo 
+        */
+        .semi-circulo.despues {
+            background-color: var(--color-secundario);
+            clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
+            z-index: 0;
+            transform: rotate(180deg);
+        }
+
+        /* 
+           Al hacer hover: El semicírculo visible rota y se oculta, 
+           mientras que el oculto rota a 0deg para completar el círculo 
+        */
+        ol li:hover .semi-circulo.antes {
+            opacity: 1;
+            transform: rotate(-180deg);
+        }
+
+        ol li:hover .semi-circulo.despues {
+            opacity: 1;
+            transform: rotate(0deg);
+        }
+
+        /* =========================================
+           EFECTO SECUNDARIO: LÍNEA ONDULADA (#24)
+           ========================================= */
+        h2 .linea-ondulada {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 6px;
+            width: 0;
+            border-radius: 3px;
+            opacity: 0;
+            transition: all 0.4s ease-in-out;
+            /* SVG en base64. Para cambiar el color, modifica fill=%2310B981 (%23 es el símbolo #) */
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z' fill='%2310B981' opacity='0.5'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: repeat-x;
+            background-size: 600px 100%;
+            background-position: 0 0;
+        }
+
+        /* Aparición de la línea en hover */
+        ol li:hover h2 .linea-ondulada {
+            width: 100%;
+            opacity: 1;
+            /* Animación de movimiento horizontal con @keyframes */
+            animation: mover-onda 1.5s linear infinite;
+        }
+
+        @keyframes mover-onda {
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: 600px 0;
+            }
+        }
+
+        /* =========================================
+           FOOTER OBLIGATORIO
+           ========================================= */
+        footer {
+            margin-top: 4rem;
+            padding: 2rem 1.5rem;
+            background-color: var(--color-principal);
+            color: #CBD5E1;
+            border-radius: 1.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+            line-height: 1.8;
+        }
+
+        footer a {
+            color: var(--color-acento);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.4s ease-in-out;
+            word-break: break-all;
+        }
+
+        footer a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        .fuente {
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 1rem;
+        }
+
+        .credito {
+            font-weight: 600;
+            color: white;
+            font-size: 0.95rem;
+        }
+
+        /* =========================================
+           RESPONSIVE (Tablets y Escritorio)
+           ========================================= */
+        @media (min-width: 768px) {
+            body {
+                padding: 3rem;
+            }
+
+            header h1 {
+                font-size: 3.5rem;
+            }
+
+            header p {
+                font-size: 1.4rem;
+            }
+
+            ol li {
+                padding: 2rem;
+                gap: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            p.descripcion {
+                font-size: 1.1rem;
+            }
+
+            .icono-contenedor {
+                width: 85px;
+                height: 85px;
+            }
+
+            .emoji {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Top 5 Hallazgos</h1>
+        <p>IA en ** Educaci&oacute;n Inclusiva</p>
+    </header>
+    <main>
+        <ol>
+            <li>
+                <div class="icono-contenedor"><span class="emoji">🤖</span>
+                    <div class="semi-circulo antes"><br></div>
+                    <div class="semi-circulo despues"><br></div>
+                </div>
+                <div class="contenido-texto">
+                    <h2>Impacto transformador de la IA en la inclusi&oacute;n educativa <!-- Contenedor para la línea ondulada --> </h2>
+                    <p class="descripcion">Las tecnolog&iacute;as asistivas basadas ** IA mejoran el acceso al contenido, la autonom&iacute;a y la participaci&oacute;n de *********** *** discapacidades.</p>
+                </div>
+            </li>
+            <li>
+                <div class="icono-contenedor"><span class="emoji">🎙️</span>
+                    <div class="semi-circulo antes"><br></div>
+                    <div class="semi-circulo despues"><br></div>
+                </div>
+                <div class="contenido-texto">
+                    <h2>Herramientas de voz y ************** del habla </h2>
+                    <p class="descripcion">Permiten a estudiantes *********** con ** aprendizaje ** forma m&aacute;s independiente y eficiente.</p>
+                </div>
+            </li>
+            <li>
+                <div class="icono-contenedor"><span class="emoji">🧠</span>
+                    <div class="semi-circulo antes"><br></div>
+                    <div class="semi-circulo despues"><br></div>
+                </div>
+                <div class="contenido-texto">
+                    <h2>************* de ******** Natural (NLP) </h2>
+                    <p class="descripcion">Facilita la personalizaci&oacute;n *** *********** adaptando ********** a *** necesidades del estudiante.</p>
+                </div>
+            </li>
+            <li>
+                <div class="icono-contenedor"><span class="emoji">⚠️</span>
+                    <div class="semi-circulo antes"><br></div>
+                    <div class="semi-circulo despues"><br></div>
+                </div>
+                <div class="contenido-texto">
+                    <h2>Limitaciones t&eacute;cnicas y desaf&iacute;os &eacute;***** </h2>
+                    <p class="descripcion">******* problemas como errores, falta de infraestructura, sesgos y riesgos de privacidad.</p>
+                </div>
+            </li>
+            <li>
+                <div class="icono-contenedor"><span class="emoji">📊</span>
+                    <div class="semi-circulo antes"><br></div>
+                    <div class="semi-circulo despues"><br></div>
+                </div>
+                <div class="contenido-texto">
+                    <h2>Necesidad de pol&iacute;***** y formaci&oacute;n </h2>
+                    <p class="descripcion">Se requiere inversi&oacute;n, capacitaci&oacute;n docente y ****** &eacute;***** para una implementaci&oacute;n efectiva.</p>
+                </div>
+            </li>
+        </ol>
+    </main>
+    <footer>
+        <p class="fuente">Fuente: AI-driven ********* technologies in inclusive education: benefits, challenges, and policy *************** - DOI: <a href="https://doi.org/10.1016/j.sftr.2025.101042" target="_blank" rel="noopener noreferrer">https://doi.org/10.1016/j.sftr.2025.101042</a></p>
+        <p class="credito">Dise&ntilde;ado por: Fuentes Rojas Luana Nathaly</p>
+    </footer>
+
+<div style="color: red">Prueba de Word a HTML - por favor <a href="https://wordtohtml.net/site/payment">Go PRO</a> para obtener el HTML completo.</div>
+</body>
+
+</html>
