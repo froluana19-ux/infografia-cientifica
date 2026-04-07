@@ -1,6 +1,4 @@
----
 
-```markdown
 # Infografía Interactiva: Top 5 Hallazgos - IA en Educación Inclusiva
 
 Infografía web de tipo lista desarrollada en un único archivo HTML puro con CSS integrado. Presenta información académica de manera dinámica, moderna y responsiva, sin dependencia de librerías externas ni JavaScript.
